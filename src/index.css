@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary - Purple #510D98 */
+    --primary: 269 81% 34%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Background - Warm Cream */
+    --background: 45 30% 97%;
+    --foreground: 271 40% 15%;
+
+    /* Card - Pure White */
+    --card: 0 0% 100%;
+    --card-foreground: 271 40% 15%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 271 40% 15%;
+
+    /* Secondary - Teal #1CD6CE */
+    --secondary: 177 77% 47%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted - Soft Gray Purple */
+    --muted: 272 15% 90%;
+    --muted-foreground: 272 15% 45%;
+
+    /* Accent - Warm Gold */
+    --accent: 43 70% 47%;
+    --accent-foreground: 45 100% 97%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border */
+    --border: 272 15% 85%;
+    --input: 272 15% 85%;
+    --ring: 269 81% 34%;
+
+    --radius: 0.75rem;
+
+    /* Custom Colors */
+    --purple-deep: 269 81% 34%;
+    --purple-medium: 269 81% 45%;
+    --purple-light: 269 81% 55%;
+    --teal: 177 77% 47%;
+    --teal-light: 177 70% 60%;
+    --gold: 43 70% 47%;
+    --gold-light: 43 60% 70%;
+    --cream: 45 30% 97%;
+    --cream-dark: 45 25% 92%;
+
+    /* Sidebar */
+    --sidebar-background: 269 81% 34%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 177 77% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 271 70% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 271 70% 50%;
+    --sidebar-ring: 177 77% 47%;
+  }
+
+  .dark {
+    --primary: 272 75% 45%;
+    --primary-foreground: 45 100% 97%;
+    --background: 272 40% 8%;
+    --foreground: 45 30% 95%;
+    --card: 272 35% 12%;
+    --card-foreground: 45 30% 95%;
+    --popover: 272 35% 12%;
+    --popover-foreground: 45 30% 95%;
+    --secondary: 272 30% 18%;
+    --secondary-foreground: 45 30% 95%;
+    --muted: 272 25% 20%;
+    --muted-foreground: 272 15% 60%;
+    --accent: 43 70% 50%;
+    --accent-foreground: 272 40% 10%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 272 25% 20%;
+    --input: 272 25% 20%;
+    --ring: 43 70% 50%;
+    --sidebar-background: 272 40% 10%;
+    --sidebar-foreground: 45 100% 97%;
+    --sidebar-primary: 43 70% 50%;
+    --sidebar-primary-foreground: 272 40% 10%;
+    --sidebar-accent: 272 35% 18%;
+    --sidebar-accent-foreground: 45 100% 97%;
+    --sidebar-border: 272 30% 18%;
+    --sidebar-ring: 43 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .pdf-section-header {
+    @apply bg-primary text-primary-foreground py-3 px-6 font-serif text-xl font-semibold;
+  }
+
+  .pdf-gold-accent {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .pdf-day-card {
+    @apply bg-primary/95 text-primary-foreground p-4 rounded-lg mb-4;
+  }
+
+  .pdf-notes-box {
+    @apply bg-primary text-primary-foreground p-6 rounded-lg;
+  }
+
+  .hotel-card {
+    @apply bg-card border border-border rounded-lg p-4 flex gap-4 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .form-section {
+    @apply bg-card p-6 rounded-xl shadow-sm border border-border mb-6;
+  }
+
+  .form-section-title {
+    @apply font-serif text-lg font-semibold text-primary mb-4 flex items-center gap-2;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary) / 0.3);
+    border-radius: 3px;
+  }
+}
