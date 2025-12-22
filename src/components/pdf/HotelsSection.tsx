@@ -41,6 +41,9 @@ export const HotelsSection = ({ hotels }: HotelsSectionProps) => {
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                 <div className="flex items-center gap-1">
+                  <span className="text-muted-foreground">{hotel.country}</span>
+                </div>
+                <div className="flex items-center gap-1">
                   <Moon className="w-4 h-4" />
                   <span>{hotel.nights} ليالي</span>
                 </div>

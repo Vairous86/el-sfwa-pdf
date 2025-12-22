@@ -1,7 +1,7 @@
 import { TripDetails } from "@/types/itinerary";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plane, Calendar, Moon, MapPin } from "lucide-react";
+import { Plane, Calendar, Moon, MapPin, Users } from "lucide-react";
 
 interface TripDetailsFormProps {
   data: TripDetails;
@@ -41,6 +41,19 @@ export const TripDetailsForm = ({ data, onChange }: TripDetailsFormProps) => {
             value={data.destination}
             onChange={(e) => handleChange('destination', e.target.value)}
             placeholder="مثال: إسطنبول، كابادوكيا، أنطاليا"
+          />
+        </div>
+
+        <div className="col-span-2">
+          <Label htmlFor="travelers" className="flex items-center gap-1">
+            <Users className="w-3.5 h-3.5" />
+            عدد المسافرين
+          </Label>
+          <Input
+            id="travelers"
+            value={data.travelers}
+            onChange={(e) => handleChange("travelers", e.target.value)}
+            placeholder="مثال: 2 بالغين و 1 طفل"
           />
         </div>
 
@@ -97,7 +110,7 @@ export const TripDetailsForm = ({ data, onChange }: TripDetailsFormProps) => {
           />
         </div>
 
-        <div className="col-span-2">
+        <div>
           <Label htmlFor="price" className="flex items-center gap-1">
             سعر الباقة (ريال)
           </Label>
@@ -106,6 +119,18 @@ export const TripDetailsForm = ({ data, onChange }: TripDetailsFormProps) => {
             value={data.price}
             onChange={(e) => handleChange('price', e.target.value)}
             placeholder="مثال: 5,999"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="price_description" className="flex items-center gap-1">
+            وصف السعر
+          </Label>
+          <Input
+            id="price_description"
+            value={data.price_description}
+            onChange={(e) => handleChange('price_description', e.target.value)}
+            placeholder="مثال: للشخص الواحد"
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { TripDetails, AgencyInfo } from "@/types/itinerary";
-import { Plane, Calendar, Moon } from "lucide-react";
+import { formatDateDMY } from "@/lib/utils";
+import { Plane, Calendar, Moon, Users } from "lucide-react";
 
 interface CoverSectionProps {
   coverImage: string;
@@ -50,12 +51,12 @@ export const CoverSection = ({ coverImage, tripDetails, agencyInfo }: CoverSecti
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-accent" />
               <span className="text-muted-foreground">المغادرة:</span>
-              <span className="font-medium text-foreground">{tripDetails.departure}</span>
+              <span className="font-medium text-foreground">{formatDateDMY(tripDetails.departure)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-accent" />
               <span className="text-muted-foreground">العودة:</span>
-              <span className="font-medium text-foreground">{tripDetails.returnDate}</span>
+              <span className="font-medium text-foreground">{formatDateDMY(tripDetails.returnDate)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Plane className="w-4 h-4 text-accent" />
@@ -67,6 +68,13 @@ export const CoverSection = ({ coverImage, tripDetails, agencyInfo }: CoverSecti
               <span className="text-muted-foreground">الليالي:</span>
               <span className="font-medium text-foreground">{tripDetails.nights}</span>
             </div>
+            {!!tripDetails.travelers && (
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-accent" />
+                <span className="text-muted-foreground">المسافرون:</span>
+                <span className="font-medium text-foreground">{tripDetails.travelers}</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -81,7 +89,7 @@ export const CoverSection = ({ coverImage, tripDetails, agencyInfo }: CoverSecti
                 <span className="font-serif text-3xl font-bold text-accent">{tripDetails.price}</span>
                 <span className="text-accent text-lg">ريال</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">للشخص الواحد</p>
+              <p className="text-xs text-muted-foreground mt-1">{tripDetails.price_description}</p>
             </div>
           </div>
         </div>

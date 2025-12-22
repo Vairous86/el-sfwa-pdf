@@ -16,6 +16,7 @@ export const HotelsForm = ({ data, onChange }: HotelsFormProps) => {
     const newHotel: Hotel = {
       id: crypto.randomUUID(),
       name: '',
+      country: '',
       stars: 4,
       nights: 1,
       notes: '',
@@ -65,6 +66,15 @@ export const HotelsForm = ({ data, onChange }: HotelsFormProps) => {
                   value={hotel.name}
                   onChange={(e) => updateHotel(hotel.id, 'name', e.target.value)}
                   placeholder="مثال: جراند حياة إسطنبول"
+                />
+              </div>
+
+              <div>
+                <Label>بلد الفندق</Label>
+                <Input
+                  value={hotel.country}
+                  onChange={(e) => updateHotel(hotel.id, 'country', e.target.value)}
+                  placeholder="مثال: تركيا"
                 />
               </div>
 

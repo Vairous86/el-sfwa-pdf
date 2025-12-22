@@ -1,4 +1,5 @@
 import { DayProgram } from "@/types/itinerary";
+import { formatDateDMY } from "@/lib/utils";
 import { CalendarDays, Utensils, Bus } from "lucide-react";
 
 interface DailyProgramSectionProps {
@@ -22,7 +23,7 @@ export const DailyProgramSection = ({ dailyProgram }: DailyProgramSectionProps) 
               <div className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-semibold">
                 اليوم {day.dayNumber}
               </div>
-              <span className="text-primary-foreground/80 text-sm">{day.date}</span>
+              <span className="text-primary-foreground/80 text-sm">{formatDateDMY(day.date)}</span>
             </div>
             
             <h4 className="font-serif font-semibold text-primary-foreground mb-2">

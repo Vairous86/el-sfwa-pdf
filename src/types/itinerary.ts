@@ -4,13 +4,16 @@ export interface TripDetails {
   airline: string;
   nights: number;
   price: string;
+  price_description: string;
   tripName: string;
   destination: string;
+  travelers: string;
 }
 
 export interface Hotel {
   id: string;
   name: string;
+  country: string;
   stars: number;
   nights: number;
   notes: string;

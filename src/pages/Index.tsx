@@ -25,11 +25,14 @@ const defaultData: ItineraryData = {
     airline: "الخطوط الجوية التركية",
     nights: 7,
     price: "5,999",
+    price_description: "للشخص الواحد",
+    travelers: "2 بالغين و 1 طفل",
   },
   hotels: [
     {
       id: "1",
       name: "جراند حياة إسطنبول",
+      country: "تركيا",
       stars: 5,
       nights: 3,
       notes: "غرفة بإطلالة على البوسفور",
@@ -39,6 +42,7 @@ const defaultData: ItineraryData = {
     {
       id: "2",
       name: "فندق المتحف كابادوكيا",
+      country: "تركيا",
       stars: 5,
       nights: 2,
       notes: "جناح كهفي مع إطلالة على البالون",
@@ -88,7 +92,16 @@ const loadFromStorage = (): ItineraryData | null => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved) as Partial<ItineraryData>;
+      return {
+        ...defaultData,
+        ...parsed,
+        tripDetails: { ...defaultData.tripDetails, ...parsed.tripDetails },
+        agencyInfo: { ...defaultData.agencyInfo, ...parsed.agencyInfo },
+        hotels: parsed.hotels ?? defaultData.hotels,
+        dailyProgram: parsed.dailyProgram ?? defaultData.dailyProgram,
+        notes: parsed.notes ?? defaultData.notes,
+      };
     }
   } catch (error) {
     console.error("Error loading from localStorage:", error);
