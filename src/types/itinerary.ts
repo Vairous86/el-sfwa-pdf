@@ -53,4 +53,5 @@ export interface ItineraryData {
   dailyProgram: DayProgram[];
   notes: Note[];
   agencyInfo: AgencyInfo;
+  bookingInstructions: string[];
 }

@@ -7,6 +7,7 @@ import { DailyProgramForm } from "@/components/forms/DailyProgramForm";
 import { NotesForm } from "@/components/forms/NotesForm";
 import { AgencyInfoForm } from "@/components/forms/AgencyInfoForm";
 import { CoverImageForm } from "@/components/forms/CoverImageForm";
+import { BookingInstructionsForm } from "@/components/forms/BookingInstructionsForm";
 import { usePDFExport } from "@/hooks/usePDFExport";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -86,6 +87,18 @@ const defaultData: ItineraryData = {
     website: "www.flytofly.com",
     address: "المملكة العربية السعودية",
   },
+  bookingInstructions: [
+    "تعتمد العملة وقت الدفع، مو وقت إرسال العرض.",
+    "في حال ما توفّرت الغرف أو الفندق المطلوب، نقترح بديل مناسب لكم.",
+    "الفنادق تشمل الإفطار لشخصين فقط لكل غرفة.",
+    "الغرفة تستوعب: شخصين بالغين + طفل أقل من 5 سنوات.",
+    "تسجيل الدخول: الساعة 2:00 ظهرًا — تسجيل الخروج: الساعة 12:00 ظهرًا.",
+    "يشمل العرض: الاستقبال والتوديع والتوصيل للفنادق.",
+    "الطيران الداخلي غير مسترد في حال تم إصدار التذكرة.",
+    "الجولات مع سائق خاص لمدة 8 ساعات يوميًا.",
+    "الجولات لا تشمل أسعار الأنشطة والتذاكر.",
+    "عرض السعر لا يعني توفر الغرف، يتم التأكيد بعد التحقق من المنتجعات واعتماد الطلب.",
+  ],
 };
 
 const loadFromStorage = (): ItineraryData | null => {
@@ -93,6 +106,12 @@ const loadFromStorage = (): ItineraryData | null => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved) as Partial<ItineraryData>;
+      
+      // Ensure bookingInstructions is an array
+      if (parsed.bookingInstructions && !Array.isArray(parsed.bookingInstructions)) {
+          parsed.bookingInstructions = defaultData.bookingInstructions;
+      }
+
       return {
         ...defaultData,
         ...parsed,
@@ -101,6 +120,7 @@ const loadFromStorage = (): ItineraryData | null => {
         hotels: parsed.hotels ?? defaultData.hotels,
         dailyProgram: parsed.dailyProgram ?? defaultData.dailyProgram,
         notes: parsed.notes ?? defaultData.notes,
+        bookingInstructions: parsed.bookingInstructions ?? defaultData.bookingInstructions,
       };
     }
   } catch (error) {
@@ -204,6 +224,9 @@ const Index = () => {
                     <TabsTrigger value="agency" className="text-xs py-2 px-1">
                       <Building className="w-4 h-4" />
                     </TabsTrigger>
+                    <TabsTrigger value="instructions" className="text-xs py-2 px-1">
+                      <AlertCircle className="w-4 h-4" />
+                    </TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="trip">
@@ -245,6 +268,13 @@ const Index = () => {
                     <AgencyInfoForm
                       data={data.agencyInfo}
                       onChange={(agencyInfo) => setData({ ...data, agencyInfo })}
+                    />
+                  </TabsContent>
+
+                  <TabsContent value="instructions">
+                    <BookingInstructionsForm
+                      instructions={data.bookingInstructions}
+                      onChange={(bookingInstructions) => setData({ ...data, bookingInstructions })}
                     />
                   </TabsContent>
                 </Tabs>

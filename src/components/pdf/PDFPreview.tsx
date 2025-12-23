@@ -47,7 +47,7 @@ export const PDFPreview = forwardRef<HTMLDivElement, PDFPreviewProps>(
           )}
 
           <div>
-            <BookingInstructionsSection />
+            <BookingInstructionsSection instructions={data.bookingInstructions} />
           </div>
 
           {data.notes.length > 0 && (

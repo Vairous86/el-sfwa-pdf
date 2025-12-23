@@ -1,19 +1,10 @@
 import { AlertCircle } from "lucide-react";
 
-export const BookingInstructionsSection = () => {
-  const instructions = [
-    "تعتمد العملة وقت الدفع، مو وقت إرسال العرض.",
-    "في حال ما توفّرت الغرف أو الفندق المطلوب، نقترح بديل مناسب لكم.",
-    "الفنادق تشمل الإفطار لشخصين فقط لكل غرفة.",
-    "الغرفة تستوعب: شخصين بالغين + طفل أقل من 5 سنوات.",
-    "تسجيل الدخول: الساعة 2:00 ظهرًا — تسجيل الخروج: الساعة 12:00 ظهرًا.",
-    "يشمل العرض: الاستقبال والتوديع والتوصيل للفنادق.",
-    "الطيران الداخلي غير مسترد في حال تم إصدار التذكرة.",
-    "الجولات مع سائق خاص لمدة 8 ساعات يوميًا.",
-    "الجولات لا تشمل أسعار الأنشطة والتذاكر.",
-    "عرض السعر لا يعني توفر الغرف، يتم التأكيد بعد التحقق من المنتجعات واعتماد الطلب.",
-  ];
+interface BookingInstructionsSectionProps {
+  instructions: string[];
+}
 
+export const BookingInstructionsSection = ({ instructions }: BookingInstructionsSectionProps) => {
   return (
     <div className="mt-6" dir="rtl">
       <div className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-t-lg">
@@ -24,7 +15,7 @@ export const BookingInstructionsSection = () => {
       </div>
       <div className="bg-muted/50 border border-border rounded-b-lg p-4">
         <ul className="space-y-2">
-          {instructions.map((instruction, index) => (
+          {Array.isArray(instructions) && instructions.map((instruction, index) => (
             <li key={index} className="flex items-start gap-2 text-sm text-foreground">
               <span className="text-accent mt-0.5">🔸</span>
               <span>{instruction}</span>
