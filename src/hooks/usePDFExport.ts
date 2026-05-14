@@ -24,7 +24,7 @@ export const usePDFExport = () => {
         wrapper.style.width = `${elementWidth}px`;
         wrapper.style.height = `${elementHeight}px`;
         wrapper.style.backgroundColor = "white";
-        
+
         // Clone the element
         const clone = element.cloneNode(true) as HTMLElement;
         wrapper.appendChild(clone);
@@ -32,7 +32,7 @@ export const usePDFExport = () => {
 
         try {
           // Render using html2canvas
-          const scale = 2;
+          const scale = 1.5; // Reduced scale slightly for smaller size while maintaining readability
           const canvas = await html2canvas(wrapper, {
             scale: scale,
             useCORS: true,
@@ -44,8 +44,8 @@ export const usePDFExport = () => {
           // Remove wrapper
           document.body.removeChild(wrapper);
 
-          // Get canvas image
-          const imgData = canvas.toDataURL("image/png");
+          // Get canvas image - use JPEG with lower quality for significantly smaller file size
+          const imgData = canvas.toDataURL("image/jpeg", 0.6);
           const canvasWidth = canvas.width;
           const canvasHeight = canvas.height;
 
@@ -54,21 +54,22 @@ export const usePDFExport = () => {
             orientation: "portrait",
             unit: "px",
             format: [canvasWidth, canvasHeight],
+            compress: true, // Enable PDF compression
           });
 
           // Add image
-          pdf.addImage(imgData, "PNG", 0, 0, canvasWidth, canvasHeight);
+          pdf.addImage(imgData, "JPEG", 0, 0, canvasWidth, canvasHeight, undefined, "FAST");
 
           // Extract links from ORIGINAL element (not clone, to get correct positioning)
           const allLinks = element.querySelectorAll("a[href]");
-          
+
           allLinks.forEach((linkEl) => {
             const href = linkEl.getAttribute("href");
             if (href && (href.startsWith("http://") || href.startsWith("https://"))) {
               try {
                 const rect = linkEl.getBoundingClientRect();
                 const elementRect = element.getBoundingClientRect();
-                
+
                 // Calculate relative position within the element
                 const relX = (rect.left - elementRect.left) * scale;
                 const relY = (rect.top - elementRect.top) * scale;
